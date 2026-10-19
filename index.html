@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Snow Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;900&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0c18;--acc:#5b4bf0;--lav:#b3a7ff;--ice:#bfe3ff;--tx:#f4f6ff;--mut:#9a9cc0;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:Jost,'Helvetica Neue',Arial,sans-serif;font-weight:300;background:var(--bg);overflow-x:hidden}
+.serif{font-family:'Playfair Display',Georgia,serif}
+header{display:grid;grid-template-columns:1fr auto;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;padding:20px 6vw;background:rgba(11,12,24,.6);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo b{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;line-height:1;background:linear-gradient(#fff,var(--ice));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo span{letter-spacing:.4em;font-size:13px}.logo small{display:block;letter-spacing:.5em;font-size:8px;color:var(--lav);margin-top:3px}
+nav{display:flex;gap:10px;align-items:center}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:999px;transition:.35s cubic-bezier(.2,.8,.2,1);letter-spacing:.12em;text-transform:uppercase;font-size:12px;padding:13px 26px;font-weight:400;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:var(--lav);box-shadow:0 8px 30px rgba(91,75,240,.35)}
+button.p,.btn.p{background:linear-gradient(135deg,#5b4bf0,#8a7bff);border-color:transparent;color:#fff}
+.btn.wa2{background:#25D366;border-color:transparent;color:#fff}
+main{max-width:1000px;margin:0 auto;padding:0 6vw 90px}
+.view{display:none;animation:in .7s cubic-bezier(.2,.8,.2,1)}.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes float{50%{transform:translateY(-10px)}}
+h1{font-family:Jost,sans-serif;font-weight:500;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(28px,5vw,48px);margin:10px 0 14px}
+.sub{color:var(--mut);max-width:520px;margin:0 auto 32px;line-height:1.7}
+.rv{opacity:0;transform:translateY(30px);transition:.9s cubic-bezier(.2,.8,.2,1)}.rv.v{opacity:1;transform:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.opt{padding:22px;border-radius:18px;background:var(--card);border:1px solid var(--line);cursor:pointer;transition:.4s cubic-bezier(.2,.8,.2,1)}
+.opt:hover{transform:translateY(-4px);border-color:var(--lav)}
+.opt.sel{border-color:var(--lav);background:rgba(91,75,240,.22);box-shadow:0 0 0 1px var(--lav),0 12px 40px rgba(91,75,240,.3)}
+.opt h4{margin:0 0 6px;font:500 18px Jost,sans-serif;letter-spacing:.02em}.opt p{margin:0;color:var(--mut);font-size:14px}
+.th{border-radius:12px;overflow:hidden;margin-bottom:14px;border:1px solid var(--line);line-height:0}.th svg{display:block;width:100%;height:auto}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;backdrop-filter:blur(10px);margin-bottom:22px}
+label{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--lav);margin:16px 0 6px}
+input,textarea{width:100%;font:inherit;color:var(--tx);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:.3s}
+input:focus,textarea:focus{border-color:var(--lav);box-shadow:0 0 0 3px rgba(179,167,255,.2)}
+h3{font:500 22px Jost,sans-serif;letter-spacing:.02em;margin:26px 0 14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:140px}.row button,.row .btn{flex:0 0 auto}
+.note{color:var(--mut);font-size:13px;line-height:1.6}.err{color:#ff9fb0;font-size:14px;min-height:20px;margin-top:10px}
+.topbar{background:#07070f;color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 6vw;display:flex;justify-content:space-between;gap:12px}
+.lnav{display:flex;gap:26px}.lnav a,.ul{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tx);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--lav);padding-bottom:3px;transition:.3s}.lnav a{border:0}.lnav a:hover,.ul:hover{opacity:.55}
+.logo{justify-self:end}
+.hero2{position:relative;height:min(78vw,560px);margin-top:4vh}
+.tag{position:absolute;top:2%;left:0;font-size:12px;letter-spacing:.3em;line-height:1.9}.tag i,.new i{display:block;width:28px;height:1px;background:var(--lav);margin-top:10px}
+.giant{background:linear-gradient(#fff,var(--ice));-webkit-background-clip:text;background-clip:text;color:transparent;position:absolute;left:0;right:0;top:22%;text-align:center;font-weight:500;font-size:clamp(100px,25vw,270px);line-height:1;letter-spacing:-.02em;animation:in 1s both}
+.mock{position:absolute;left:50%;top:6%;width:clamp(120px,22vw,210px);transform:translateX(-50%);filter:drop-shadow(0 30px 30px rgba(0,0,0,.28));animation:float 6s ease-in-out infinite}
+.cta{position:absolute;left:0;bottom:0;display:flex;gap:22px;align-items:center;flex-wrap:wrap}.new{position:absolute;right:0;bottom:0;font-size:12px;letter-spacing:.3em;line-height:1.9;text-align:right}.new i{margin-left:auto}
+.full{border-radius:28px;margin:22px 0;overflow:hidden}
+.strip{background:linear-gradient(135deg,#0e0f2a,#1c1d4a);color:#fff;padding:40px 6vw;margin-top:60px}.strip .grid{max-width:1000px;margin:0 auto}.st{display:flex;gap:16px;align-items:center;cursor:pointer;transition:.4s}.st:hover{transform:translateY(-3px)}.st .th{width:110px;flex:0 0 110px;margin:0;border-color:rgba(255,255,255,.2)}.st b{display:block;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}.st p{margin:0 0 8px;font-size:13px;opacity:.7}.st u{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.banner{background:linear-gradient(135deg,#1c1d4a,#3a30a8);padding:60px 6vw;display:grid;grid-template-columns:1fr 1.3fr;gap:36px;align-items:center}.banner h2{font-weight:500;font-size:clamp(40px,7vw,68px);line-height:1;margin:10px 0 18px}.eyebrow{font-size:12px;letter-spacing:.3em}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.bgrid .st{display:block}.bgrid .st .th{width:100%;margin-bottom:8px}.bgrid .st b{font-size:12px;margin:0}
+.feat{background:rgba(255,255,255,.05);border:1px solid var(--line);padding:36px 6vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px}.feat div{display:flex;gap:14px;align-items:center;font-size:13px}.feat b{display:block;font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:12px}.feat svg{width:34px;flex:0 0 34px;fill:none;stroke:var(--lav);stroke-width:1.3}
+.best{padding:56px 6vw 20px;background:rgba(255,255,255,.04)}.row2{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}.row2 h3{margin:0;font-size:24px}.best .st{display:block}.best .st .th{width:100%;margin-bottom:10px}.best .st p{color:var(--mut)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60% 50% at 10% 100%,rgba(91,75,240,.55),transparent 70%),radial-gradient(50% 40% at 90% 0%,rgba(31,31,85,.9),transparent 70%),linear-gradient(160deg,#141535,#0b0c18);background-size:140% 140%;animation:drift 18s ease-in-out infinite alternate}@keyframes drift{to{background-position:100% 60%}}
+.kpis{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.kpi small{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--lav)}
+.steps{display:flex;gap:6px;margin:18px 0}.steps span{flex:1;text-align:center;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding-bottom:8px;border-bottom:2px solid var(--line);color:var(--mut)}.steps span.on{color:var(--tx);border-color:var(--lav)}
+.badge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;background:rgba(179,167,255,.18);color:var(--lav);margin-right:6px}.badge.x{background:rgba(255,159,176,.15);color:#ff9fb0}
+@media(max-width:700px){.steps span{font-size:9px;letter-spacing:.04em}}
+.recap{white-space:pre-wrap;font-size:14px;line-height:1.7;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+.hr{display:flex;align-items:center;gap:18px;justify-self:end}header button{padding:10px 18px}
+.wa{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 18px;border-radius:999px;font-size:13px;letter-spacing:.06em;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:.3s}.wa:hover{transform:translateY(-3px)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1c1d4a;color:#fff;padding:12px 20px;border-radius:999px;border:1px solid var(--line);z-index:20;animation:in .4s}
+@media(max-width:700px){
+header{grid-template-columns:1fr;gap:10px;padding:12px 4vw}.hr{justify-self:stretch;flex-wrap:wrap;gap:8px;justify-content:space-between}.lnav{order:2;gap:18px}nav{gap:6px;flex-wrap:wrap}header button{padding:8px 12px;font-size:10px;letter-spacing:.06em}
+.banner{grid-template-columns:1fr;padding-top:36px;padding-bottom:36px}.topbar span+span{display:none}.hero2{height:110vw}.giant{top:30%;font-size:clamp(84px,27vw,160px)}.st .th{width:90px;flex-basis:90px}
+.logo b{font-size:28px}.logo span{font-size:11px;letter-spacing:.3em}.lnav a{font-size:11px}
+main{padding:0 4vw 90px}.panel{padding:20px;border-radius:18px}.strip,.banner,.feat,.best{padding-left:5vw;padding-right:5vw}
+.tag{font-size:10px}.new{display:none}.cta{gap:14px}
+input,textarea{font-size:16px}.row>*{min-width:0}.row{gap:8px}.grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr}
+.wa{padding:14px;left:14px}.wa span{display:none}.topbar{font-size:10px;padding:8px 4vw}
+}
+@media(max-width:380px){.st .th{width:76px;flex-basis:76px}.lnav{gap:12px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div class="topbar"><span>Commandez votre site en ligne</span><span>Suivez votre commande avec votre référence</span></div>
+<header>
+<div class="lnav"><a onclick="go('home')">Accueil</a><a onclick="startOrder()">Commander</a></div>
+<div class="hr"><nav><button onclick="go('suivi')">Suivre ma commande</button><button onclick="go('contact')">Contact</button></nav><div class="logo" onclick="go('home')"><b>S</b><div><span>SNOW</span><small>AGENCY</small></div></div></div>
+</header>
+<main>
+
+<section class="view on" id="v-home">
+<div class="hero2">
+<div class="tag">SITES WEB<br>SUR MESURE<br>POUR VOUS.<i></i></div>
+<div class="giant">SNOW</div>
+<svg class="mock" viewBox="0 0 210 290"><rect width="210" height="290" fill="#5b4bf0"/><rect x="8" y="8" width="194" height="274" fill="#e9ecff"/><rect x="18" y="20" width="26" height="3" fill="#1c1d4a"/><rect x="150" y="20" width="14" height="2" fill="#6d6fa8"/><rect x="170" y="20" width="14" height="2" fill="#6d6fa8"/><text x="105" y="168" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="150" fill="#1c1d4a">S</text><rect x="18" y="200" width="90" height="5" fill="#1c1d4a"/><rect x="18" y="212" width="60" height="5" fill="#1c1d4a"/><rect x="18" y="240" width="46" height="14" fill="#1c1d4a"/><rect x="150" y="212" width="42" height="42" fill="#b3a7ff"/></svg>
+<div class="cta"><button class="p" onclick="startOrder()">Commander</button><a class="ul" href="#styles">Explorer les styles</a></div>
+<div class="new">NOUVEAU<br>SERVICE<br>2026<i></i></div>
+</div>
+<div class="strip full"><div class="grid" id="cat-strip"></div></div>
+<div class="banner full" id="styles"><div><p class="eyebrow">NOS STYLES</p><h2>VOTRE<br>IMAGE.</h2><p class="sub" style="margin:0 0 22px">Découvrez tout ce que nous pouvons créer pour vous.</p><button class="p" onclick="startOrder()">Choisir mon style</button></div><div class="bgrid" id="style-strip"></div></div>
+<div class="feat full">
+<div class="rv"><svg viewBox="0 0 40 40"><path d="M8 32l2-8L28 6l6 6L16 30z M24 10l6 6"/></svg><span><b>Sur mesure</b>Selon vos envies</span></div>
+<div class="rv"><svg viewBox="0 0 40 40"><path d="M6 8h28v18H16l-8 7v-7H6z"/></svg><span><b>Échanges directs</b>Par email ou WhatsApp</span></div>
+<div class="rv"><svg viewBox="0 0 40 40"><circle cx="20" cy="18" r="11"/><path d="M15 18l4 4 7-8M14 28l-3 8 9-3 9 3-3-8"/></svg><span><b>Qualité soignée</b>Design épuré</span></div>
+<div class="rv"><svg viewBox="0 0 40 40"><rect x="9" y="7" width="22" height="28"/><path d="M15 5h10v5H15zM14 20l4 4 8-8"/></svg><span><b>Accompagnement</b>Du devis à la mise en ligne</span></div>
+</div>
+<div class="best full"><div class="row2"><h3>NOS GENRES DE SITES</h3><a class="ul" onclick="startOrder()">Commander</a></div><div class="grid" id="genre-strip"></div></div>
+</section>
+
+<section class="view" id="v-client">
+<h1>Commander mon site</h1>
+<div class="panel" id="o-form"><h3 style="margin-top:0">Nouvelle commande</h3>
+<p class="note">1. Choisissez un style</p><div class="grid" id="g-style"></div>
+<p class="note" style="margin-top:22px">2. Choisissez un genre de site</p><div class="grid" id="g-genre"></div>
+<div class="row"><div><label>Nom</label><input id="o-name" autocomplete="name"></div><div><label>Entreprise</label><input id="o-co" autocomplete="organization"></div></div><div class="row"><div><label>Email</label><input id="o-mail" type="email" autocomplete="email"></div><div><label>Numéro joignable</label><input id="o-phone" type="tel" autocomplete="tel" placeholder="Avec indicatif pays"></div></div>
+<label>Vos souhaits (couleurs, pages, idées…)</label><textarea id="o-note" rows="3"></textarea>
+<div class="err" id="o-err"></div><button class="p" id="o-go" style="margin-top:6px">Envoyer ma commande</button></div>
+<div class="panel" id="o-done" hidden></div>
+</section>
+
+<section class="view" id="v-suivi">
+<h1>Suivre ma commande</h1>
+<p class="note" style="margin-bottom:18px">Entrez la référence reçue au moment de votre commande (format SNW suivi de 6 chiffres), indiquée dans votre email de confirmation.</p>
+<div class="panel" style="padding:20px"><div class="row"><input id="t-code" placeholder="SNW-000000" autocomplete="off" inputmode="numeric" style="text-transform:uppercase"><button class="p" id="t-go">Suivre</button></div><div class="err" id="t-err"></div></div>
+<div id="t-res"></div>
+</section>
+
+<section class="view" id="v-contact">
+<h1>Contact</h1>
+<p class="note" style="margin-bottom:22px">Une question sur votre site ou votre commande ? Contactez-nous directement.</p>
+<div class="kpis"><div class="kpi panel"><small>Email</small><div id="ct-mail"></div></div><div class="kpi panel"><small>WhatsApp</small><div id="ct-wa"></div></div></div>
+</section>
+
+</main>
+<a class="wa" onclick="openWA()" role="button" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7z"/><path d="M9 9c0 3 3 6 6 6l1.2-1.4-2-1-1 .6c-.8-.4-1.6-1.2-2-2l.6-1-1-2z" fill="#fff" stroke="none"/></svg><span>WhatsApp</span></a>
+<script>
+/* ===== Coordonnées : renseignez votre numéro WhatsApp ici (avec indicatif, ex. 2250700000000) ===== */
+const CONTACT={email:'snowfirst09@gmail.com',whatsapp:''};
+
+/* ===== EmailJS : envoi automatique des commandes ===== */
+const EMAILJS={publicKey:'MMiCg-tJxZgcZ0TAX',service:'service_id6ze48',templateAdmin:'template_p43vf0a',templateClient:'template_ba9hd0g'};
+
+/* ===== SUIVI DES COMMANDES =====
+   Quand vous recevez une commande, ajoutez une ligne avec sa référence, puis remettez le fichier en ligne.
+   statut : 'Reçue' | 'En cours' | 'Livrée' | 'Annulée'
+   maj : date de la dernière mise à jour — message : note visible par le client (facultatif)
+   Supprimez la ligne SNW-123456 une fois vos tests faits. */
+const SUIVI={
+  'SNW-123456':{statut:'En cours',maj:'19/10/2026',message:'Maquette en préparation, première version prévue cette semaine.'},
+};
+
+const $=s=>document.querySelector(s);
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const STYLES=[['Minimaliste','Épuré, beaucoup d’espace, très lisible'],['Luxe','Élégant, doré, typographie raffinée'],['Sombre & néon','Moderne, contrasté, dynamique'],['Coloré & créatif','Vivant, audacieux, plein d’énergie']];
+const GENRES=[['Site vitrine','Présenter votre entreprise'],['Boutique en ligne','Vendre vos produits'],['Portfolio','Montrer vos réalisations'],['Réservation','Prise de rendez-vous en ligne'],['Blog / actualités','Publier des articles'],['Application web','Un outil sur mesure']];
+let sel={style:null,genre:null};
+
+function go(v){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));scrollTo({top:0,behavior:'smooth'});if(v==='client')loadClient();if(v==='suivi')prepTrack();reveal()}
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+function prepTrack(){const last=ls.get('snow_last');if(last&&!$('#t-code').value)$('#t-code').value=last}
+function track(){let code=$('#t-code').value.trim().toUpperCase().replace(/\s/g,'');if(/^\d{6}$/.test(code))code='SNW-'+code;$('#t-code').value=code;const _c=code,er=$('#t-err'),box=$('#t-res');er.textContent='';box.innerHTML='';
+if(!/^SNW-\d{6}$/.test(code)){er.textContent='Entrez une référence valide, par exemple SNW-482193.';return}
+ls.set('snow_last',code);const d=SUIVI[code];
+if(!d){box.innerHTML=`<div class="panel"><h3 style="margin-top:0">${esc(code)}</h3><p class="note">Cette référence n’apparaît pas encore. Si vous venez de commander, nous l’enregistrons dès réception de votre message (en général sous 24 h). Vérifiez aussi que vous avez bien envoyé la commande par email ou WhatsApp.</p><a class="ul" onclick="go('contact')">Nous contacter</a></div>`;return}
+const order=['Reçue','En cours','Livrée'],idx=order.indexOf(d.statut),cancel=d.statut==='Annulée';
+const steps=cancel?'':`<div class="steps">${order.map((x,i)=>`<span class="${i<=idx?'on':''}">${x}</span>`).join('')}</div>`;
+box.innerHTML=`<div class="panel"><div class="row" style="justify-content:space-between"><h3 style="margin:0">${esc(code)}</h3><div style="flex:0 0 auto"><span class="badge ${cancel?'x':''}">${esc(d.statut)}</span></div></div>${steps}${d.message?`<p style="line-height:1.7">${esc(d.message)}</p>`:''}${d.maj?`<p class="note">Mis à jour le ${esc(d.maj)}</p>`:''}<a class="ul" onclick="go('contact')">Une question ? Contactez-nous</a></div>`}
+$('#t-go').onclick=track;$('#t-code').addEventListener('keydown',e=>{if(e.key==='Enter')track()});
+function startOrder(){go('client')}
+function reveal(){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.2});document.querySelectorAll('.rv:not(.v)').forEach((e,i)=>{e.style.transitionDelay=i*90+'ms';io.observe(e)})}
+
+const R=(x,y,w,h,f,rx=0,o=1)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}" opacity="${o}"/>`;
+const S=(c,b)=>`<svg viewBox="0 0 160 100" aria-hidden="true">${R(0,0,160,100,b)}${c}</svg>`;
+const L='#b3a7ff',D='#2a2b6b',D2='#1f2052';
+const TH={
+'Minimaliste':S(R(14,12,22,3,'#222')+R(100,12,12,2,'#999')+R(118,12,12,2,'#999')+R(136,12,12,2,'#999')+R(14,44,70,7,'#222')+R(14,56,46,7,'#222')+R(14,72,52,2,'#aaa')+R(14,78,40,2,'#aaa')+'<rect x="14" y="86" width="22" height="6" rx="3" fill="none" stroke="#222"/>','#f5f4f0'),
+'Luxe':S('<rect x="6" y="6" width="148" height="88" fill="none" stroke="#c9a13b" stroke-width=".6"/><text x="80" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#e3c16a">Élégance</text>'+R(52,46,56,1,'#c9a13b')+R(48,56,64,2,'#7a6a3a')+R(56,62,48,2,'#7a6a3a')+'<rect x="60" y="76" width="40" height="9" fill="none" stroke="#c9a13b" stroke-width=".8"/>','#15110a'),
+'Sombre & néon':S('<defs><radialGradient id="nn"><stop offset="0" stop-color="#ff2bd6" stop-opacity=".7"/><stop offset="1" stop-color="#ff2bd6" stop-opacity="0"/></radialGradient></defs><circle cx="120" cy="30" r="46" fill="url(#nn)"/>'+R(14,14,18,3,'#00e5ff')+R(14,40,74,8,'#00e5ff')+R(14,54,52,8,'#fff',0,.9)+'<rect x="14" y="74" width="40" height="10" rx="5" fill="none" stroke="#ff2bd6" stroke-width="1.5"/><rect x="100" y="60" width="44" height="26" rx="4" fill="none" stroke="#00e5ff" stroke-width=".8" opacity=".7"/>','#080813'),
+'Coloré & créatif':S('<circle cx="118" cy="34" r="26" fill="#ff6b6b"/><circle cx="136" cy="62" r="16" fill="#ffd23f"/><rect x="96" y="66" width="26" height="22" rx="5" fill="#2ec4b6" transform="rotate(-10 109 77)"/>'+R(14,30,62,9,'#3a2e5c',4.5)+R(14,44,44,9,'#3a2e5c',4.5)+R(14,66,34,12,'#ff6b6b',6),'#fff4e0'),
+'Site vitrine':S(R(8,8,14,3,L)+R(104,9,10,2,'#5b4bf0')+R(120,9,10,2,'#5b4bf0')+R(136,9,10,2,'#5b4bf0')+R(8,20,144,34,D,4)+R(16,29,60,5,'#fff')+R(16,38,40,3,L)+R(8,62,44,28,D2,3)+R(58,62,44,28,D2,3)+R(108,62,44,28,D2,3)+R(14,68,20,3,L)+R(64,68,20,3,L)+R(114,68,20,3,L),'#14153a'),
+'Boutique en ligne':S(R(8,8,20,3,L)+R(136,6,16,7,L,3.5)+[8,45,82,119].map(x=>R(x,20,33,38,'#3a3b8a',3)+R(x,62,26,3,'#fff')+R(x,69,16,3,L)+R(x,78,33,9,'#5b4bf0',4.5)).join(''),'#14153a'),
+'Portfolio':S(R(8,8,60,48,'#5b4bf0',3)+R(72,8,40,30,'#8a7bff',3)+R(116,8,36,48,'#3a3b8a',3)+R(72,42,40,14,'#bfe3ff',3)+R(8,60,36,32,'#3a3b8a',3)+R(48,60,64,32,'#7a6cf5',3)+R(116,60,36,32,'#bfe3ff',3,.8),'#14153a'),
+'Réservation':S(R(8,8,60,4,L)+[0,1,2,3].map(r=>[0,1,2,3,4,5,6].map(c=>R(10+c*14,22+r*15,11,11,(r===1&&c===3)?'#5b4bf0':D,2)).join('')).join('')+R(114,22,38,8,D,3)+R(114,34,38,8,D,3)+R(114,46,38,8,'#5b4bf0',3)+R(114,70,38,12,L,6),'#14153a'),
+'Blog / actualités':S(R(8,8,24,4,L)+[0,1,2].map(i=>R(8,20+i*26,36,22,i===1?'#5b4bf0':D,3)+R(52,23+i*26,70,5,'#fff')+R(52,32+i*26,98,3,'#5b4bf0')+R(52,38+i*26,60,3,'#5b4bf0')).join(''),'#14153a'),
+'Application web':S(R(0,0,34,100,'#0e0f2a')+R(8,10,18,4,L)+R(8,24,18,3,'#5b4bf0')+R(8,32,18,3,'#5b4bf0')+R(8,40,18,3,'#5b4bf0')+[42,81,120].map(x=>R(x,10,34,22,D,3)+R(x+5,16,16,3,L)+R(x+5,23,22,4,'#fff')).join('')+R(42,40,112,52,D2,3)+[0,1,2,3,4,5,6].map(i=>R(50+i*15,84-[14,24,18,34,28,40,32][i],9,[14,24,18,34,28,40,32][i],i%2?'#8a7bff':'#5b4bf0',1.5)).join(''),'#14153a')
+};
+function grid(el,list,key){el.innerHTML=list.map(([t,d])=>`<div class="opt ${sel[key]===t?'sel':''}" data-v="${esc(t)}"><div class="th">${TH[t]||''}</div><h4>${esc(t)}</h4><p>${esc(d)}</p></div>`).join('');
+el.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{sel[key]=o.dataset.v;grid(el,list,key)})}
+function loadClient(){const b=$('#o-go');b.disabled=false;b.textContent='Envoyer ma commande';$('#o-form').hidden=false;$('#o-done').hidden=true;grid($('#g-style'),STYLES,'style');grid($('#g-genre'),GENRES,'genre')}
+
+const newCode=()=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return 'SNW-'+String(a[0]%1000000).padStart(6,'0')};
+$('#o-go').onclick=async()=>{const er=$('#o-err');er.textContent='';
+const name=$('#o-name').value.trim(),co=$('#o-co').value.trim(),em=$('#o-mail').value.trim(),ph=$('#o-phone').value.trim(),note=$('#o-note').value.trim();
+if(!name||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)||ph.replace(/\D/g,'').length<8){er.textContent='Renseignez votre nom, un email valide et un numéro joignable.';return}
+if(!sel.style||!sel.genre){er.textContent='Choisissez un style et un genre.';return}
+if(!window.emailjs){er.textContent='Le service d’envoi n’a pas pu se charger. Vérifiez votre connexion et réessayez.';return}
+const code=newCode();
+const params={reference:code,name,company:co||'—',email:em,phone:ph,style:sel.style,genre:sel.genre,notes:note||'—'};
+const b=$('#o-go');b.disabled=true;b.textContent='Envoi en cours…';
+try{
+await emailjs.send(EMAILJS.service,EMAILJS.templateAdmin,params);
+try{await emailjs.send(EMAILJS.service,EMAILJS.templateClient,params)}catch(e){console.warn('Confirmation client non envoyée',e)}
+['#o-name','#o-co','#o-mail','#o-phone','#o-note'].forEach(i=>$(i).value='');sel={style:null,genre:null};
+showConfirm(code)}
+catch(e){console.error(e);b.disabled=false;b.textContent='Envoyer ma commande';
+er.innerHTML=`L’envoi a échoué. Réessayez dans un instant, ou écrivez-nous directement à <a href="mailto:${esc(CONTACT.email)}" style="color:var(--lav)">${esc(CONTACT.email)}</a>.`}};
+function showConfirm(code){go('client');$('#o-form').hidden=true;const w=(CONTACT.whatsapp||'').replace(/\D/g,'');
+$('#o-done').innerHTML=`<h3 style="margin-top:0">Commande envoyée, merci !</h3><p style="line-height:1.7">Votre référence : <b>${esc(code)}</b></p><p class="note">Un email de confirmation contenant cette référence vient de vous être envoyé (pensez à vérifier vos spams). Vous pourrez suivre l’avancement dans « Suivre ma commande ».</p><div class="row" style="gap:12px;margin-top:14px"><button class="p" onclick="go('suivi')">Suivre ma commande</button>${w?`<a class="btn wa2" href="https://wa.me/${w}?text=${encodeURIComponent('Bonjour Snow Agency, ma commande '+code)}" target="_blank" rel="noopener">WhatsApp</a>`:''}<button onclick="go('home')">Accueil</button></div>`;
+$('#o-done').hidden=false;ls.set('snow_last',code)}
+
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}
+function openWA(){const w=(CONTACT.whatsapp||'').replace(/\D/g,'');if(!w){toast('Le numéro WhatsApp sera bientôt disponible.');return}window.open('https://wa.me/'+w+'?text='+encodeURIComponent('Bonjour Snow Agency, '),'_blank','noopener')}
+function fillContact(){const e=CONTACT.email,w=(CONTACT.whatsapp||'').replace(/\D/g,'');
+$('#ct-mail').innerHTML=e?`<b style="font-size:18px;display:block;margin:10px 0">${esc(e)}</b><p><a class="ul" href="mailto:${esc(e)}">Écrire un email</a></p>`:'<p class="note">Adresse email bientôt disponible.</p>';
+$('#ct-wa').innerHTML=w?`<b style="font-size:18px;display:block;margin:10px 0">+${esc(w)}</b><p><a class="ul" onclick="openWA()">Ouvrir WhatsApp</a></p>`:'<p class="note">Numéro WhatsApp bientôt disponible.</p>'}
+function pick(k,v){sel[k]=v;startOrder()}
+function fillHome(){
+const cat=(k,t,n,d)=>`<div class="st rv" onclick="pick('${k}','${t}')"><div class="th">${TH[t]}</div><div><b>${n}</b><p>${d}</p><u>Choisir →</u></div></div>`;
+$('#cat-strip').innerHTML=cat('genre','Site vitrine','Vitrine','Présentez votre activité.')+cat('genre','Boutique en ligne','Boutique','Vendez vos produits.')+cat('genre','Portfolio','Portfolio','Montrez vos réalisations.');
+$('#style-strip').innerHTML=STYLES.map(([t])=>`<div class="st rv" onclick="pick('style','${t.replace(/&/g,'&amp;')}')"><div class="th">${TH[t]}</div><b>${esc(t)}</b></div>`).join('');
+$('#genre-strip').innerHTML=GENRES.map(([t,d])=>`<div class="st rv" onclick="pick('genre','${t}')"><div class="th">${TH[t]}</div><b>${esc(t)}</b><p>${esc(d)}</p></div>`).join('');}
+try{emailjs.init({publicKey:EMAILJS.publicKey})}catch(e){}
+addEventListener('pageshow',()=>{const b=document.querySelector('#o-go');if(b){b.disabled=false;b.textContent='Envoyer ma commande'}});fillContact();fillHome();reveal();
+{const q=new URLSearchParams(location.search).get('commande');if(q&&/^SNW-\d{6}$/.test(q)){showConfirm(q);history.replaceState(null,'',location.pathname)}}
+</script>
+</body>
+</html>
