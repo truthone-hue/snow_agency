@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Snow Agency – Tableau de bord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;900&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0c18;--acc:#5b4bf0;--lav:#b3a7ff;--ice:#bfe3ff;--tx:#f4f6ff;--mut:#9a9cc0;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:Jost,'Helvetica Neue',Arial,sans-serif;font-weight:300;background:radial-gradient(1200px 600px at 80% -10%,rgba(91,75,240,.25),transparent),var(--bg);overflow-x:hidden}
+[hidden]{display:none!important}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 5vw;background:rgba(11,12,24,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.logo{display:flex;align-items:center;gap:12px}
+.logo b{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;line-height:1;background:linear-gradient(#fff,var(--ice));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo span{letter-spacing:.4em;font-size:13px}.logo small{display:block;letter-spacing:.5em;font-size:8px;color:var(--lav);margin-top:3px}
+main{max-width:1000px;margin:0 auto;padding:26px 5vw 80px}
+h1{font-weight:500;letter-spacing:.02em;text-transform:uppercase;font-size:clamp(24px,4vw,38px);margin:6px 0 18px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:999px;transition:.3s;letter-spacing:.1em;text-transform:uppercase;font-size:11px;padding:11px 20px;font-weight:400}
+button:hover{border-color:var(--lav);background:rgba(255,255,255,.1)}
+button.p{background:linear-gradient(135deg,#5b4bf0,#8a7bff);border-color:transparent;color:#fff}
+button.d{border-color:rgba(255,159,176,.4);color:#ff9fb0}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,textarea,select{width:100%;font:inherit;color:var(--tx);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none}
+select option{color:#111}
+input:focus,textarea:focus,select:focus{border-color:var(--lav);box-shadow:0 0 0 3px rgba(179,167,255,.2)}
+label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lav);margin:14px 0 6px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
+.note{color:var(--mut);font-size:14px;line-height:1.6}
+.err{color:#ff9fb0;min-height:20px;margin:8px 0;font-size:14px}
+.auth{max-width:420px;margin:8vh auto 0}
+.pw{position:relative}.pw input{padding-right:96px}.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:7px 14px}
+.ul{color:var(--lav);cursor:pointer;font-size:14px;text-decoration:underline;text-underline-offset:4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:18px}
+.stat{padding:14px 16px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.stat b{display:block;font:500 28px Jost,sans-serif}.stat small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--lav)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.tools>*{flex:1;min-width:180px}
+.oc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;margin-bottom:16px}
+.oh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ref{font:500 20px Jost,sans-serif;letter-spacing:.06em}
+.badge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;background:rgba(179,167,255,.18);color:var(--lav);margin-left:8px}
+.info{margin:12px 0;line-height:1.8;font-size:15px}.info a{color:var(--lav)}
+.notes{white-space:pre-wrap;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:14px;color:var(--mut);margin:8px 0}
+.stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:14px 0}
+.stepper button{padding:10px 4px;font-size:10px;letter-spacing:.05em;border-radius:14px;line-height:1.3}
+.stepper button.done{background:rgba(91,75,240,.3);border-color:rgba(179,167,255,.5)}
+.stepper button.cur{background:linear-gradient(135deg,#5b4bf0,#8a7bff);border-color:transparent;color:#fff;box-shadow:0 0 24px rgba(138,123,255,.5)}
+.stepper button b{display:block;font-size:16px;font-weight:500;margin-bottom:2px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.warn{color:#ffd48a;font-size:14px;margin:8px 0}
+@media(max-width:700px){.stepper{grid-template-columns:repeat(5,1fr)}.stepper button{font-size:9px;padding:8px 2px}.stepper button span{display:none}.oc{padding:16px}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c1d4a;color:#fff;padding:12px 20px;border-radius:999px;border:1px solid var(--line);z-index:20}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><b>S</b><div><span>SNOW</span><small>TABLEAU DE BORD</small></div></div>
+  <div id="who-box" hidden style="display:flex;gap:10px;align-items:center"><span class="note" id="who"></span><button id="out">Déconnexion</button></div>
+</header>
+<main>
+
+<section id="login">
+  <div class="panel auth">
+    <h1 style="font-size:26px">Espace administrateur</h1>
+    <p class="note">Connectez-vous pour gérer l’avancement des commandes.</p>
+    <label>Email</label><input id="l-mail" type="email" autocomplete="username">
+    <label>Mot de passe</label>
+    <div class="pw"><input id="l-pass" type="password" autocomplete="current-password"><button type="button" class="eye" id="eye">Voir</button></div>
+    <div class="err" id="l-err"></div>
+    <button class="p" id="l-go">Se connecter</button>
+    <p style="margin-top:16px"><a class="ul" id="l-forgot">Mot de passe oublié ?</a></p>
+  </div>
+</section>
+
+<section id="dash" hidden>
+  <h1>Commandes</h1>
+  <div class="stats" id="stats"></div>
+  <div class="tools">
+    <input id="q" placeholder="Rechercher (référence, nom, email, téléphone…)">
+    <select id="f"><option value="0">Toutes les étapes</option></select>
+  </div>
+  <div class="err" id="d-err"></div>
+  <div id="list"></div>
+</section>
+
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyAxEjqffUTpphl1zRw6Q93SQ-TXzJbIQcU",
+  authDomain: "site-snow-6f1b4.firebaseapp.com",
+  projectId: "site-snow-6f1b4",
+  storageBucket: "site-snow-6f1b4.firebasestorage.app",
+  messagingSenderId: "210056077914",
+  appId: "1:210056077914:web:76a0cc2b5538249eb96e63"
+});
+const fs = getFirestore(app), au = getAuth(app);
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const STEPS = ['Demande reçue', 'En cours de conception', 'Finalisation de la conception', 'Validation et ajustements', 'Commande livrée'];
+const SHORT = ['Reçue', 'Conception', 'Finalisation', 'Validation', 'Livrée'];
+const etapeOf = d => Number.isInteger(d.etape) ? Math.min(5, Math.max(1, d.etape)) : ({ 'Reçue': 1, 'En cours': 2, 'Livrée': 5 }[d.statut] || 1);
+const fr = () => new Date().toLocaleDateString('fr-FR');
+const toast = m => { const t = document.createElement('div'); t.className = 'toast'; t.textContent = m; document.body.appendChild(t); setTimeout(() => t.remove(), 2800); };
+
+let orders = {}, suivi = {}, drafts = new Map(), unsubs = [], pending = false;
+
+/* ---------- Connexion ---------- */
+$('#eye').onclick = () => { const i = $('#l-pass'), h = i.type === 'password'; i.type = h ? 'text' : 'password'; $('#eye').textContent = h ? 'Masquer' : 'Voir'; };
+$('#l-go').onclick = async () => {
+  const e = $('#l-mail').value.trim(), p = $('#l-pass').value, er = $('#l-err'); er.textContent = '';
+  if (!e || !p) { er.textContent = 'Email et mot de passe requis.'; return; }
+  $('#l-go').disabled = true;
+  try { await signInWithEmailAndPassword(au, e, p); $('#l-pass').value = ''; }
+  catch (x) { er.textContent = x.code === 'auth/too-many-requests' ? 'Trop de tentatives. Réessayez dans quelques minutes.' : 'Email ou mot de passe incorrect.'; }
+  $('#l-go').disabled = false;
+};
+$('#l-pass').addEventListener('keydown', e => { if (e.key === 'Enter') $('#l-go').click(); });
+$('#l-forgot').onclick = async () => {
+  const e = $('#l-mail').value.trim(), er = $('#l-err'); er.textContent = '';
+  if (!e) { er.textContent = 'Entrez d’abord votre email ci-dessus.'; return; }
+  try { await sendPasswordResetEmail(au, e); toast('Si ce compte existe, un email de réinitialisation a été envoyé.'); } catch (x) { er.textContent = 'Envoi impossible.'; }
+};
+$('#out').onclick = () => signOut(au);
+
+onAuthStateChanged(au, u => {
+  $('#login').hidden = !!u; $('#dash').hidden = !u; $('#who-box').hidden = !u;
+  if (u) { $('#who').textContent = u.email; start(); } else { stop(); }
+});
+
+/* ---------- Données en direct ---------- */
+function fail(e) {
+  console.error(e);
+  $('#d-err').textContent = e.code === 'permission-denied'
+    ? 'Accès refusé : ce compte n’est pas autorisé comme administrateur (vérifiez les règles Firestore).'
+    : 'Impossible de charger les commandes pour le moment.';
+}
+function start() {
+  stop(); $('#d-err').textContent = '';
+  unsubs.push(onSnapshot(query(collection(fs, 'orders'), orderBy('createdAt', 'desc')), s => { orders = {}; s.forEach(d => orders[d.id] = d.data()); render(); }, fail));
+  unsubs.push(onSnapshot(collection(fs, 'suivi'), s => { suivi = {}; s.forEach(d => suivi[d.id] = d.data()); render(); }, fail));
+}
+function stop() { unsubs.forEach(u => u()); unsubs = []; orders = {}; suivi = {}; $('#list').innerHTML = ''; }
+
+/* ---------- Affichage ---------- */
+$('#f').innerHTML += STEPS.map((t, i) => `<option value="${i + 1}">${i + 1}. ${esc(t)}</option>`).join('');
+$('#q').oninput = render; $('#f').onchange = render;
+$('#list').addEventListener('focusout', () => { if (pending) { pending = false; setTimeout(render, 50); } });
+
+function render() {
+  const a = document.activeElement;
+  if (a && a.matches && a.matches('#list textarea')) { pending = true; return; }
+  const codes = [...new Set([...Object.keys(orders), ...Object.keys(suivi)])];
+  const ts = c => (orders[c] && orders[c].createdAt) || (suivi[c] && suivi[c].createdAt) || 0;
+  codes.sort((x, y) => ts(y) - ts(x));
+  const cnt = [0, 0, 0, 0, 0, 0];
+  codes.forEach(c => { if (suivi[c]) cnt[etapeOf(suivi[c])]++; });
+  $('#stats').innerHTML = `<div class="stat"><b>${codes.length}</b><small>Total</small></div>` + STEPS.map((t, i) => `<div class="stat"><b>${cnt[i + 1]}</b><small>${esc(SHORT[i])}</small></div>`).join('');
+  const q = $('#q').value.trim().toLowerCase(), f = +$('#f').value;
+  const list = codes.filter(c => {
+    const o = orders[c] || {}, s = suivi[c];
+    if (f && (!s || etapeOf(s) !== f)) return false;
+    if (!q) return true;
+    return [c, o.first_name, o.last_name, o.company, o.email, o.phone, o.style, o.genre].join(' ').toLowerCase().includes(q);
+  });
+  $('#list').innerHTML = list.length ? list.map(card).join('') : '<div class="panel"><p class="note" style="margin:0">Aucune commande à afficher.</p></div>';
+}
+function card(c) {
+  const o = orders[c], s = suivi[c], cur = s ? etapeOf(s) : 0;
+  const date = ts => ts ? new Date(ts).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' }) : '';
+  const info = o ? `<div class="info"><b>${esc((o.first_name || '') + ' ' + (o.last_name || ''))}</b>${o.company ? ' · ' + esc(o.company) : ''}<br>
+    ${o.email ? `<a href="mailto:${esc(o.email)}">${esc(o.email)}</a>` : ''}${o.phone ? ` · <a href="tel:${esc(String(o.phone).replace(/\s/g, ''))}">${esc(o.phone)}</a>` : ''}<br>
+    ${esc(o.genre || '')} · ${esc(o.style || '')}</div>${o.notes ? `<div class="notes">${esc(o.notes)}</div>` : ''}`
+    : '<p class="warn">Détails du client non enregistrés dans la base (ils sont dans l’email de commande).</p>';
+  const body = s ? `
+    <div class="stepper">${STEPS.map((t, i) => `<button data-act="step" data-n="${i + 1}" class="${i + 1 < cur ? 'done' : i + 1 === cur ? 'cur' : ''}"><b>${i + 1}</b><span>${esc(SHORT[i])}</span></button>`).join('')}</div>
+    <label>Message affiché au client sur l’étape en cours (facultatif)</label>
+    <textarea rows="2" maxlength="280" data-draft placeholder="Ex. : Première maquette prête, je vous l’envoie par email.">${esc(drafts.has(c) ? drafts.get(c) : (s.message || ''))}</textarea>
+    <div class="acts">
+      <button data-act="save">Enregistrer le message</button>
+      ${cur < 5 ? '<button class="p" data-act="next">Étape suivante →</button>' : ''}
+      <button class="d" data-act="del">Supprimer</button>
+    </div>`
+    : `<p class="warn">Le suivi client n’existe pas encore pour cette référence.</p><div class="acts"><button class="p" data-act="mk">Créer le suivi</button><button class="d" data-act="del">Supprimer</button></div>`;
+  return `<div class="oc" data-code="${esc(c)}"><div class="oh"><div><span class="ref">${esc(c)}</span>${cur ? `<span class="badge">${esc(STEPS[cur - 1])}</span>` : ''}</div><small class="note">${date((o && o.createdAt) || (s && s.createdAt))}</small></div>${info}${body}</div>`;
+}
+
+/* ---------- Actions ---------- */
+$('#list').addEventListener('input', e => { if (e.target.matches('textarea[data-draft]')) drafts.set(e.target.closest('.oc').dataset.code, e.target.value); });
+$('#list').addEventListener('click', async e => {
+  const b = e.target.closest('button[data-act]'); if (!b) return;
+  const card = b.closest('.oc'), code = card.dataset.code, s = suivi[code], act = b.dataset.act;
+  const ta = card.querySelector('textarea[data-draft]'), typed = ta ? ta.value.trim() : '';
+  b.disabled = true;
+  try {
+    if (act === 'step' || act === 'next') {
+      const n = act === 'next' ? etapeOf(s) + 1 : +b.dataset.n;
+      const msg = typed !== (s.message || '') ? typed : '';
+      await updateDoc(doc(fs, 'suivi', code), { etape: n, statut: STEPS[n - 1], maj: fr(), message: msg });
+      drafts.delete(code); toast('Étape mise à jour : ' + STEPS[n - 1]);
+    } else if (act === 'save') {
+      await updateDoc(doc(fs, 'suivi', code), { message: typed, maj: fr() });
+      drafts.delete(code); toast('Message enregistré');
+    } else if (act === 'mk') {
+      await setDoc(doc(fs, 'suivi', code), { statut: STEPS[0], etape: 1, maj: fr(), message: '', createdAt: (orders[code] && orders[code].createdAt) || Date.now() });
+      toast('Suivi créé');
+    } else if (act === 'del') {
+      if (!confirm('Supprimer définitivement la commande ' + code + ' ?')) { b.disabled = false; return; }
+      await Promise.allSettled([deleteDoc(doc(fs, 'suivi', code)), deleteDoc(doc(fs, 'orders', code))]);
+      drafts.delete(code); toast('Commande supprimée');
+    }
+  } catch (x) { console.error(x); toast('Action impossible (droits ou connexion).'); }
+  b.disabled = false;
+});
+</script>
+</body>
+</html>
