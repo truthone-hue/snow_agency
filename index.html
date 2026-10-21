@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Snow Agency – Votre site web sur mesure</title>
+<title>Snow CI – Votre site web sur mesure</title>
 <meta name="description" content="Commandez votre site web sur mesure en ligne : choisissez le style et le genre de site, suivez chaque étape de la conception avec votre référence.">
 <meta name="theme-color" content="#0b0c18">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%235b4bf0'/%3E%3Cstop offset='1' stop-color='%238a7bff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url%28%23g%29'/%3E%3Ctext x='32' y='48' text-anchor='middle' font-family='Georgia%2Cserif' font-weight='bold' font-size='46' fill='white'%3ES%3C/text%3E%3C/svg%3E">
@@ -12,18 +12,18 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Snow Agency">
+<meta name="apple-mobile-web-app-title" content="Snow CI">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:site_name" content="Snow Agency">
-<meta property="og:title" content="Snow Agency – Votre site web sur mesure">
+<meta property="og:site_name" content="Snow CI">
+<meta property="og:title" content="Snow CI – Votre site web sur mesure">
 <meta property="og:description" content="Choisissez le style et le genre de votre site, commandez en ligne et suivez chaque étape jusqu’à la livraison.">
 <meta property="og:url" content="https://truthone-hue.github.io/snow_agency/">
 <meta property="og:image" content="https://truthone-hue.github.io/snow_agency/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Snow Agency – Votre site web sur mesure">
+<meta name="twitter:title" content="Snow CI – Votre site web sur mesure">
 <meta name="twitter:description" content="Commandez votre site web sur mesure et suivez chaque étape en ligne.">
 <meta name="twitter:image" content="https://truthone-hue.github.io/snow_agency/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,7 +155,7 @@ h1{font-size:clamp(22px,7vw,30px);margin:8px 0 14px}h3{font-size:18px;margin:26p
 <body>
 <header>
 <div class="lnav"><a onclick="go('home')">Accueil</a><a onclick="startOrder()">Commander</a></div>
-<div class="hr"><nav><button onclick="go('suivi')">Suivre ma commande</button><button onclick="go('contact')">Contact</button></nav><div class="logo" onclick="go('home')"><b>S</b><div><span>SNOW</span><small>AGENCY</small></div></div></div>
+<div class="hr"><nav><button onclick="go('suivi')">Suivre ma commande</button><button onclick="go('contact')">Contact</button></nav><div class="logo" onclick="go('home')"><b>S</b><div><span>SNOW</span><small>CI</small></div></div></div>
 </header>
 <main>
 
@@ -238,11 +238,11 @@ h1{font-size:clamp(22px,7vw,30px);margin:8px 0 14px}h3{font-size:18px;margin:26p
 </main>
 <footer class="foot">
 <div class="foot-in">
-<div class="fcol"><div class="flogo"><b>S</b><div><span>SNOW</span><small>AGENCY</small></div></div><p class="fnote">Votre site web sur mesure, du choix du style jusqu’à la livraison.</p></div>
+<div class="fcol"><div class="flogo"><b>S</b><div><span>SNOW</span><small>CI</small></div></div><p class="fnote">Votre site web sur mesure, du choix du style jusqu’à la livraison.</p></div>
 <div class="fcol"><h5>Navigation</h5><a class="fl" onclick="go('home')">Accueil</a><a class="fl" onclick="go('client')">Commander</a><a class="fl" onclick="go('suivi')">Suivre ma commande</a><a class="fl" onclick="go('home');setTimeout(()=>{const e=document.getElementById('faq');if(e)e.scrollIntoView({behavior:'smooth'})},200)">Questions fréquentes</a><a class="fl" onclick="go('contact')">Espace client</a><a class="fl" onclick="installApp()">Installer l’application</a></div>
 <div class="fcol"><h5>Contact</h5><span id="f-mail" class="fnote"></span><a class="fl" onclick="openWA()">WhatsApp</a></div>
 </div>
-<div class="foot-bot">© <span id="f-year"></span> Snow Agency. Tous droits réservés.</div>
+<div class="foot-bot">© <span id="f-year"></span> Snow CI. Tous droits réservés.</div>
 </footer>
 <a class="wa" onclick="openWA()" role="button" aria-label="Nous écrire sur WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.3 18.7z"/><path d="M9 9c0 3 3 6 6 6l1.2-1.4-2-1-1 .6c-.8-.4-1.6-1.2-2-2l.6-1-1-2z" fill="#fff" stroke="none"/></svg><span>WhatsApp</span></a>
 <script>
@@ -369,13 +369,13 @@ ls.set('snow_last_order',Date.now());showConfirm(code)}
 catch(e){console.error(e);b.disabled=false;b.textContent='Envoyer ma commande';
 er.innerHTML=`L’envoi a échoué. Réessayez dans un instant, ou écrivez-nous directement à <a onclick="mailTo()" style="color:var(--lav);cursor:pointer;text-decoration:underline">${esc(CONTACT.email)}</a>.`}};
 function showConfirm(code){go('client');$('#o-form').hidden=true;const w=(CONTACT.whatsapp||'').replace(/\D/g,'');
-$('#o-done').innerHTML=`<h3 style="margin-top:0">Commande envoyée, merci !</h3><p style="line-height:1.7">Votre référence : <b>${esc(code)}</b></p><p class="note">Un email de confirmation contenant cette référence vient de vous être envoyé (pensez à vérifier vos spams). Vous pourrez suivre l’avancement dans « Suivre ma commande ».</p><div class="row" style="gap:12px;margin-top:14px"><button class="p" onclick="go('suivi')">Suivre ma commande</button>${w?`<a class="btn wa2" href="https://wa.me/${w}?text=${encodeURIComponent('Bonjour Snow Agency, ma commande '+code)}" target="_blank" rel="noopener">WhatsApp</a>`:''}<button onclick="go('home')">Accueil</button></div>`;
+$('#o-done').innerHTML=`<h3 style="margin-top:0">Commande envoyée, merci !</h3><p style="line-height:1.7">Votre référence : <b>${esc(code)}</b></p><p class="note">Un email de confirmation contenant cette référence vient de vous être envoyé (pensez à vérifier vos spams). Vous pourrez suivre l’avancement dans « Suivre ma commande ».</p><div class="row" style="gap:12px;margin-top:14px"><button class="p" onclick="go('suivi')">Suivre ma commande</button>${w?`<a class="btn wa2" href="https://wa.me/${w}?text=${encodeURIComponent('Bonjour Snow CI, ma commande '+code)}" target="_blank" rel="noopener">WhatsApp</a>`:''}<button onclick="go('home')">Accueil</button></div>`;
 $('#o-done').hidden=false;ls.set('snow_last',code)}
 
 function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}
-function openWA(){const w=(CONTACT.whatsapp||'').replace(/\D/g,'');if(!w){toast('Le numéro WhatsApp sera bientôt disponible.');return}window.open('https://wa.me/'+w+'?text='+encodeURIComponent('Bonjour Snow Agency, '),'_blank','noopener')}
+function openWA(){const w=(CONTACT.whatsapp||'').replace(/\D/g,'');if(!w){toast('Le numéro WhatsApp sera bientôt disponible.');return}window.open('https://wa.me/'+w+'?text='+encodeURIComponent('Bonjour Snow CI, '),'_blank','noopener')}
 function mailTo(){const e=CONTACT.email;if(!e){toast('Adresse email bientôt disponible.');return}
-const su=encodeURIComponent('Demande d’information – Snow Agency'),to=encodeURIComponent(e),old=$('#mm');if(old)old.remove();
+const su=encodeURIComponent('Demande d’information – Snow CI'),to=encodeURIComponent(e),old=$('#mm');if(old)old.remove();
 const d=document.createElement('div');d.id='mm';d.className='mm';
 d.innerHTML=`<div class="mbox"><h3 style="margin-top:0">Nous écrire</h3><p class="note" style="margin-bottom:16px">Choisissez votre messagerie pour nous envoyer un email.</p>
 <a class="mbtn" href="mailto:${esc(e)}?subject=${su}">Ouvrir mon application mail</a>
